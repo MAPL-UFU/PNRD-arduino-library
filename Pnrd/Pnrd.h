@@ -82,6 +82,7 @@ public:
 
 	void setAsTagInformation(PetriNetInformation info);
 	void setAsDeviceInformation(PetriNetInformation info);
+	void resetAsTagInformation();
 	bool isTagInformation(PetriNetInformation info);
 	uint8_t* getDataInTag();
 

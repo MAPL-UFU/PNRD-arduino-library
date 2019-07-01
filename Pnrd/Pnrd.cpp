@@ -39,6 +39,9 @@ void Pnrd::setAsTagInformation(PetriNetInformation info) {
 	dataInTag |= 0b1 << ((int) info);
 }
 
+void Pnrd::resetAsTagInformation(){
+	dataInTag = 0b0;
+}
 void Pnrd::setAsDeviceInformation(PetriNetInformation info) {
 	dataInTag &= ~ (0b1 << ((int)info));
 }
