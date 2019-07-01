@@ -25,4 +25,5 @@ The PN532NFcReader library reads and writes the tags using the PN532 library and
 The PNRD library  was built based on the Pnrd class. This class is a child of the PetriNet class and inherits its public methods.
 
 _Made By : CARLOS EDUARDO |Engenharia Mecatrônica- UFU_
+
 _Improved and maintained by Roger Carrijo_
