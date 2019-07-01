@@ -1,9 +1,8 @@
 # PNRD and IPNRD
-======
 
 [Laboratório de Planejamento Automático de Manufatura](http://www.mecanica.ufu.br/en/laboratorio/laboratorio-de-planejamento-automatico-de-manufatura)
 
-*Arduino libraries for creating PNRD and IPNRD applications*
+**Arduino libraries for creating PNRD and IPNRD applications**
 
 
 ## PetriNet
