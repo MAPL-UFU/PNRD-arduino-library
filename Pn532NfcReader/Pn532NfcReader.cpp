@@ -3,7 +3,7 @@
 #define PN532_NFC_READER_CPP
 
  
-#include "Pn532nfcReader.h"	
+#include "Pn532NfcReader.h"	
 
 static const byte comparisonByteVector[] = {'P','N','R','D'};
 String comparisonString = "PNRD";
@@ -38,7 +38,7 @@ ReadError  Pn532NfcReader::read(Pnrd* pnrd){
 						byte uid[uidLength];
 						tag.getUid(uid, uidLength);
 						//Stores only the two last hex values of the uid as the tag id;
-						pnrd->setTagId(uid);	
+						pnrd->setTagId(uid[uidLength]);		
 				
 						return getInformation( payload, pnrd);
 				}				
@@ -89,7 +89,12 @@ WriteError Pn532NfcReader::write(Pnrd* pnrd){
 			size +=  2;
 			size +=  sizeof(TagHistoryEntry) * MAX_NUM_OF_TAG_HISTORY_ENTRIES;
 		}
-		
+
+		if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
+			size +=  sizeof(uint8_t) * (pnrd->getGoalTokenSize());
+		}
+
+
 		if(size > 1024){
 			return WriteError::NOT_ENOUGH_SPACE;
 		}
@@ -233,7 +238,7 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 	index++;
 	payload[index] = pnrd->getNumberOfTransitions();
 	index++;
-	
+	payload[index] = pnrd->getGoalTokenSize();
 	
 	if (pnrd->isTagInformation(PetriNetInformation::TOKEN_VECTOR)) {
 		size =  sizeof(uint16_t)* pnrd->getNumberOfPlaces();
