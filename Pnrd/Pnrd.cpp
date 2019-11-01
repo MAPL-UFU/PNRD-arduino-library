@@ -6,8 +6,21 @@
 #include "Pnrd.h"
 
 //Constructors
+
+// Goal Token size Included
+Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory, uint8_t goal_token_size) : PetriNet(num_places, num_transitions, num_max_of_inputs, num_max_of_outputs, hasConditions, goal_token_size) {
+	this->hasTagHistory = hasTagHistory;
+	reader = readerPointer;
+	preparePnrdMemoryStack();
+}
+
 Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory) : PetriNet(num_places, num_transitions, num_max_of_inputs, num_max_of_outputs, hasConditions) {
 	this->hasTagHistory = hasTagHistory;
+	reader = readerPointer;
+	preparePnrdMemoryStack();
+}
+// Goal Token size Included
+Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, uint8_t goal_token_size) : PetriNet(num_places, num_transitions, num_max_of_inputs, num_max_of_outputs, goal_token_size) {
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
@@ -16,9 +29,20 @@ Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, 
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
+// Goal Token size Included
+Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, uint8_t goal_token_size) : PetriNet(num_places, num_transitions, hasConditions, goal_token_size) {
+	this->hasTagHistory = hasTagHistory;
+	reader = readerPointer;
+	preparePnrdMemoryStack();
+}
 
 Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory) : PetriNet(num_places, num_transitions, hasConditions) {
 	this->hasTagHistory = hasTagHistory;
+	reader = readerPointer;
+	preparePnrdMemoryStack();
+}
+// Goal Token size Included
+Pnrd::Pnrd(Reader* readerPointer, uint8_t num_of_places, uint8_t num_of_transitions, uint8_t goal_token_size) :PetriNet(num_of_places, num_of_transitions, goal_token_size) {
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }

@@ -14,7 +14,7 @@ enum class PetriNetInformation {
 	FIRE_VECTOR = 2,
 	CONDITIONS = 3,  
 	TAG_HISTORY = 4,
-	OTHER = 5
+	GOAL_TOKEN = 5
 };
 
 enum class ReadError {
@@ -74,9 +74,13 @@ private:
 	void saveTagHistory();
 
 public:
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory, uint8_t goal_token_size);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory);
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, uint8_t goal_token_size);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, uint8_t goal_token_size);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory);
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t goal_token_size);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions);
 	~Pnrd();
 

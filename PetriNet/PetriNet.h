@@ -42,13 +42,17 @@ protected:
 	uint16_t*  TokenVector;
 	uint16_t*  FireVector;
 	uint8_t*   Conditions;	
-	
+ 
 	bool	   hasConditions = false;	
 	
+	uint8_t*  GoalToken;
+
 	uint8_t   NumberOfPlaces;
 	uint8_t   NumberOfTransitions;
 	uint8_t   NumberMaxOfInputs; 
 	uint8_t	  NumberMaxOfOutputs;
+
+	uint8_t   GoalTokenSize;
 
 	PlatformInterface* platformInterface = new Arduino();
 
@@ -64,9 +68,13 @@ private:
 	void prepareMemoryStack();	
 
 public:
+	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, uint8_t goal_token_size);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions);
+	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, uint8_t goal_token_size);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
+	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, uint8_t goal_token_size);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions);
+	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t goal_token_size);
 	PetriNet(uint8_t num_places, uint8_t num_transitions);
 	~PetriNet();
 
@@ -84,6 +92,11 @@ public:
 	void  getTokenVector(uint16_t* vector);
 	uint16_t*  getTokenVectorPointer();
 	void  printTokenVector();
+
+	void  setGoalToken(uint8_t* vector);
+	void  getGoalToken(uint8_t* vector);
+	uint8_t*  getGoalTokenPointer();
+	void  printGoalToken();
 
 	bool setIncidenceMatrix(int8_t* matrix);
 	void getIncidenceMatrix(int8_t* matrix);

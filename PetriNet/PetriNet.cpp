@@ -1,6 +1,24 @@
 #include "PetriNet.h"
 
 //Constructors
+
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, uint8_t goal_token_size) {
+
+	this->hasConditions = hasConditions;
+	
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_max_of_inputs;
+	this->NumberMaxOfOutputs = num_max_of_outputs;
+
+
+	this->GoalTokenSize = goal_token_size;
+
+	prepareMemoryStack();
+}
+
+
 PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions) {
 	this->hasConditions = hasConditions;
 	
@@ -13,6 +31,19 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_
 	prepareMemoryStack();
 }
 
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, uint8_t goal_token_size) {
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_max_of_inputs;
+	this->NumberMaxOfOutputs = num_max_of_outputs;
+
+	this->GoalTokenSize = goal_token_size;
+
+	prepareMemoryStack();	
+}
+
+
 PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs) {
 	this->NumberOfPlaces = num_places;
 	this->NumberOfTransitions = num_transitions;
@@ -23,6 +54,22 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_
 	prepareMemoryStack();	
 }
 
+
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, uint8_t goal_token_size) {
+	this->hasConditions = hasConditions;
+
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_places;
+	this->NumberMaxOfOutputs = num_places;	
+
+	this->GoalTokenSize = goal_token_size;
+
+	prepareMemoryStack();
+}
+
+
 PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions) {
 	this->hasConditions = hasConditions;
 
@@ -31,6 +78,19 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditio
 
 	this->NumberMaxOfInputs = num_places;
 	this->NumberMaxOfOutputs = num_places;
+
+	prepareMemoryStack();
+}
+
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t goal_token_size) {
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_places;
+	this->NumberMaxOfOutputs = num_places;
+
+
+	this->GoalTokenSize = goal_token_size;
 
 	prepareMemoryStack();
 }
@@ -51,6 +111,7 @@ PetriNet::~PetriNet() {
 	free(FireVector);
 	free(AdjacencyList);
 	free(Conditions);
+	free(GoalToken);
 }
 
 //Public methods
@@ -67,10 +128,11 @@ uint8_t PetriNet::getNumberMaxOfInputs()
 	return NumberMaxOfInputs;
 }
 
-uint8_t PetriNet::getNumberMaxOfOutputs()
+uint8_t PetriNet::getGoalTokenSize()
 {
-	return NumberMaxOfOutputs;
+	return GoalTokenSize;
 }
+
 
 void PetriNet::setFireVector(uint16_t*  vector)
 {
@@ -127,6 +189,32 @@ void PetriNet::printTokenVector() {
 
 	print('\n');
 }
+
+
+
+
+void PetriNet::setGoalToken(uint8_t*  vector) {
+		GoalToken = vector
+}
+
+void PetriNet::getGoalToken(uint8_t* vector) {
+		vector =  GoalToken;
+	}
+}
+
+uint8_t * PetriNet::getGoalTokenPointer()
+{
+	return GoalToken;
+}
+
+void PetriNet::printGoalToken() {	
+	print("Token Vector:\n\n");
+	print(GoalToken);
+	print('\n');
+}
+
+
+
 
 bool PetriNet::setIncidenceMatrix(int8_t* matrix) {
 	bool noError = true;
@@ -634,8 +722,10 @@ FireError PetriNet::isTriggerable() {
 
 //Private methods
 void PetriNet::prepareMemoryStack() {
+
 	TokenVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfPlaces);
-	FireVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfTransitions);
+	FireVector  = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfTransitions);
+	GoalToken  = (uint8_t*)malloc(sizeof(uint8_t)*GoalTokenSize);
 
 	uint16_t sizeOfAdjacencyList = (NumberMaxOfInputs + NumberMaxOfOutputs) * NumberOfTransitions;
 	AdjacencyList = (uint8_t*)malloc(sizeof(uint8_t)* sizeOfAdjacencyList);

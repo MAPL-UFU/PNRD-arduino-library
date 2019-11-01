@@ -38,7 +38,7 @@ ReadError  Pn532NfcReader::read(Pnrd* pnrd){
 						byte uid[uidLength];
 						tag.getUid(uid, uidLength);
 						//Stores only the two last hex values of the uid as the tag id;
-						pnrd->setTagId(uid[uidLength - 2]);	
+						pnrd->setTagId(uid);	
 				
 						return getInformation( payload, pnrd);
 				}				
@@ -206,6 +206,14 @@ ReadError Pn532NfcReader::getInformation(byte* payload,Pnrd * pnrd) {
 			index++;
 		}
 	}
+	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
+		size =  sizeof(uint8_t) * pnrd->getGoalTokenSize();
+		for(uint8_t counter = 0; counter < size ; counter++) {
+			((byte*)pnrd->getGoalTokenPointer())[counter] = payload[index];
+			index++;
+		}
+	}
+	
 	
 	return ReadError::NO_ERROR;
 }
@@ -225,6 +233,7 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 	index++;
 	payload[index] = pnrd->getNumberOfTransitions();
 	index++;
+	
 	
 	if (pnrd->isTagInformation(PetriNetInformation::TOKEN_VECTOR)) {
 		size =  sizeof(uint16_t)* pnrd->getNumberOfPlaces();
@@ -273,6 +282,14 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 			payload[index] = pointer[counter];
 			index++;
 		}	
+	}
+
+	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
+		size =  sizeof(uint8_t) * pnrd->getGoalTokenSize();
+		for(uint8_t counter = 0; counter < size ; counter++) {
+			payload[index] = ((byte*)pnrd->getGoalTokenPointer())[counter];
+			index++;
+		}
 	}
 
 	return WriteError::NO_ERROR;
