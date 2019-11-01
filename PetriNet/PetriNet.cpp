@@ -210,11 +210,6 @@ uint8_t * PetriNet::getGoalTokenPointer()
 	return GoalToken;
 }
 
-void PetriNet::printGoalToken() {	
-	print("Token Vector:\n\n");
-	print(GoalToken);
-	print('\n');
-}
 
 
 
