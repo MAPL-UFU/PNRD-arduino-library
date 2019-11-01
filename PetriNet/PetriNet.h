@@ -97,7 +97,9 @@ public:
 	void  getGoalToken(uint8_t* vector);
 	uint8_t*  getGoalTokenPointer();
 	void  printGoalToken();
+	uint8_t getGoalTokenSize();
 
+	
 	bool setIncidenceMatrix(int8_t* matrix);
 	void getIncidenceMatrix(int8_t* matrix);
 	int8_t getMatrixElement(int8_t place, int8_t transition);
