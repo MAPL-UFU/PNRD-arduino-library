@@ -194,11 +194,14 @@ void PetriNet::printTokenVector() {
 
 
 void PetriNet::setGoalToken(uint8_t*  vector) {
-		GoalToken = vector
+	for (uint8_t place = 0; place < GoalTokenSize; place++) {
+		 GoalToken[place]= vector[place];
+	}
 }
 
 void PetriNet::getGoalToken(uint8_t* vector) {
-		vector =  GoalToken;
+	for (uint8_t place = 0; place < GoalTokenSize; place++) {
+		vector[place] = GoalToken[place];
 	}
 }
 
