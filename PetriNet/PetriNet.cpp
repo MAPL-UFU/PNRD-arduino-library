@@ -128,6 +128,11 @@ uint8_t PetriNet::getNumberMaxOfInputs()
 	return NumberMaxOfInputs;
 }
 
+uint8_t PetriNet::getNumberMaxOfOutputs()
+{
+	return NumberMaxOfOutputs;
+}
+
 uint8_t PetriNet::getGoalTokenSize()
 {
 	return GoalTokenSize;
