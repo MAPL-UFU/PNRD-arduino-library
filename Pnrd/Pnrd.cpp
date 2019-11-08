@@ -171,7 +171,7 @@ void Pnrd::removeLastTagHistoryEntry() {
 bool Pnrd::setGoalToken(uint16_t * vector) {
 	bool noError = true;
 	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
-		GoalToken[counter] = vector[counter];
+		goalToken[counter] = vector[counter];
 	}
 
 	return noError;
@@ -179,7 +179,7 @@ bool Pnrd::setGoalToken(uint16_t * vector) {
 
 void Pnrd::getGoalToken(uint16_t* vector) {
 	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
-			vector[counter] = GoalToken[counter];
+			vector[counter] = goalToken[counter];
 		}
 	}
 }
@@ -194,7 +194,7 @@ void PetriNet::printGoalToken() {
 	print("Token Vector:\n\n");
 
 	for (int32_t counter = 0; counter< goalTokenSize; counter++) {
-		print(GoalToken[counter]);
+		print(goalToken[counter]);
 		print('\n');		
 	}
 	print('\n');
