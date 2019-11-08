@@ -3,7 +3,7 @@
 #define PN532_NFC_READER_CPP
 
  
-#include "Pn532nfcReader.h"	
+#include "Pn532NfcReader.h"	
 
 static const byte comparisonByteVector[] = {'P','N','R','D'};
 String comparisonString = "PNRD";
