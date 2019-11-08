@@ -180,7 +180,7 @@ bool Pnrd::setGoalToken(uint16_t * vector) {
 void Pnrd::getGoalToken(uint16_t* vector) {
 	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
 			vector[counter] = goalToken[counter];
-		}
+
 	}
 }
 
