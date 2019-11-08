@@ -187,7 +187,7 @@ void Pnrd::getGoalToken(uint16_t* vector) {
 
 uint16_t * Pnrd::getGoalTokenPointer()
 {
-	return TokenVector;
+	return goalToken;
 }
 
 void Pnrd::printGoalToken() {	
