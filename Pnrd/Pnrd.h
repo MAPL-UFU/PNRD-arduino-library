@@ -118,7 +118,7 @@ public:
 	void  addTagHistoryEntry(TagHistoryEntry entry);
 	void  removeLastTagHistoryEntry();
 	
-	bool  setGoalToken(GoalTokenEntry* vector, uint8_t numberOfEntries);
+	bool  setGoalToken(GoalTokenEntry* vector);
 	uint8_t  getGoalToken(GoalTokenEntry* vector);
 	GoalTokenEntry*  getGoalTokenPointer();
 	uint8_t* getGoalTokenIndexPointer();
