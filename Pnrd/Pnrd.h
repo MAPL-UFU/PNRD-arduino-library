@@ -57,6 +57,11 @@ struct GoalTokenEntry {
 class Reader;
 
 class Pnrd : public PetriNet {
+
+protected:
+	uint8_t   goalTokenSize;
+
+
 private:
 	Reader*	 reader;
 	uint8_t dataInTag;

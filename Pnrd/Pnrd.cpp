@@ -19,6 +19,7 @@ Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, 
 Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, bool hasGoalToken) : PetriNet(num_places, num_transitions, hasConditions) {
 	this->hasGoalToken = hasGoalToken;
 	this->hasTagHistory = hasTagHistory;
+	this->goalTokenSize = num_places;
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
@@ -167,7 +168,7 @@ void Pnrd::removeLastTagHistoryEntry() {
 	}
 }
 
-bool Pnrd::setGoalToken(GoalTokenEntry * vector, uint8_t goalTokenSize) {
+bool Pnrd::setGoalToken(GoalTokenEntry * vector) {
 	bool noError = true;
 	for (uint8_t index = 0; index < goalTokenSize; index++) {
 		GoalToken[index] = vector[index];
