@@ -168,34 +168,36 @@ void Pnrd::removeLastTagHistoryEntry() {
 	}
 }
 
-bool Pnrd::setGoalToken(GoalTokenEntry * vector) {
+bool Pnrd::setGoalToken(uint16_t * vector) {
 	bool noError = true;
-	for (uint8_t index = 0; index < goalTokenSize; index++) {
-		GoalToken[index] = vector[index];
+	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
+		GoalToken[counter] = vector[counter];
 	}
 
 	return noError;
 }
 
-uint8_t Pnrd::getGoalToken(GoalTokenEntry * vector) {
-	uint8_t index = 0;	
-
-	for (uint8_t counter = 0; counter < GoalTokenIndex; index++, counter++) {
-		if (!(GoalToken[index].Place == 0xFF)) {
-			vector[index] = GoalToken[index];
-			index++;
+void Pnrd::getGoalToken(uint16_t* vector) {
+	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
+			vector[counter] = GoalToken[counter];
 		}
 	}
-
-	return index;
 }
 
-GoalTokenEntry* Pnrd::getGoalTokenPointer() {	
-	return goalToken;
+
+uint16_t * PetriNet::getGoalTokenPointer()
+{
+	return TokenVector;
 }
 
-uint8_t* Pnrd::getGoalTokenIndexPointer() {
-	return &goalTokenIndex;
+void PetriNet::printGoalToken() {	
+	print("Token Vector:\n\n");
+
+	for (int32_t counter = 0; counter< goalTokenSize; counter++) {
+		print(GoalToken[counter]);
+		print('\n');		
+	}
+	print('\n');
 }
 
 
@@ -223,13 +225,7 @@ void Pnrd::preparePnrdMemoryStack() {
 		tagHistoryIndex = 0;
 	}
 	if (hasGoalToken) {
-		goalToken = (GoalTokenEntry*)malloc(sizeof(GoalTokenEntry)* goalTokenSize);
-		for (uint8_t count = 0; count < goalTokenSize; count++) {
-			GoalTokenEntry entry;
-			entry.Place = 0xFF;
-			goalToken[count] = entry;
-		}
-		goalTokenIndex = 0;
+		goalToken = (uint16_t*)malloc(sizeof(uint16_t)* goalTokenSize);
 	}
 }
 

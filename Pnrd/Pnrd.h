@@ -74,8 +74,7 @@ private:
 
 	bool hasTagHistory;
 
-	GoalTokenEntry* goalToken;
-	uint8_t goalTokenIndex = 0;
+	uint16_t* goalToken;
 
 	bool hasGoalToken;
 	
@@ -118,11 +117,10 @@ public:
 	void  addTagHistoryEntry(TagHistoryEntry entry);
 	void  removeLastTagHistoryEntry();
 	
-	bool  setGoalToken(GoalTokenEntry* vector);
-	uint8_t  getGoalToken(GoalTokenEntry* vector);
-	GoalTokenEntry*  getGoalTokenPointer();
-	uint8_t* getGoalTokenIndexPointer();
-
+	bool  setGoalToken(uint16_t* vector);
+	uint8_t  getGoalToken(uint16_t* vector);
+	uint16_t*  getGoalTokenPointer();
+	void  printGoalToken();
 
 	FireError fire();
 	FireError fire(uint8_t transition);
