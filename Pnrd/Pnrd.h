@@ -49,6 +49,9 @@ struct TagHistoryEntry {
 	uint16_t Tokens = 0;
 	uint32_t TimeStamp = 0;
 };
+struct GoalTokenEntry {	
+	uint16_t Tokens = 0;
+};
 
 
 class Reader;
@@ -65,6 +68,11 @@ private:
 	uint8_t tagHistoryIndex = 0;
 
 	bool hasTagHistory;
+
+	GoalTokenEntry* goalToken;
+	uint8_t goalTokenIndex = 0;
+
+	bool hasGoalToken;
 	
 
 private:
@@ -76,6 +84,7 @@ private:
 public:
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, bool hasGoalToken);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions);
 	~Pnrd();
@@ -103,6 +112,12 @@ public:
 
 	void  addTagHistoryEntry(TagHistoryEntry entry);
 	void  removeLastTagHistoryEntry();
+	
+	bool  setGoalToken(GoalTokenEntry* vector, uint8_t numberOfEntries);
+	uint8_t  getGoalToken(GoalTokenEntry* vector);
+	GoalTokenEntry*  getGoalTokenPointer();
+	uint8_t* getGoalTokenIndexPointer();
+
 
 	FireError fire();
 	FireError fire(uint8_t transition);

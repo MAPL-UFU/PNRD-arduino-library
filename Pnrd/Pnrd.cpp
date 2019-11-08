@@ -16,6 +16,12 @@ Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, 
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
+Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, bool hasGoalToken) : PetriNet(num_places, num_transitions, hasConditions) {
+	this->hasGoalToken = hasGoalToken;
+	this->hasTagHistory = hasTagHistory;
+	reader = readerPointer;
+	preparePnrdMemoryStack();
+}
 
 Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory) : PetriNet(num_places, num_transitions, hasConditions) {
 	this->hasTagHistory = hasTagHistory;
@@ -32,6 +38,9 @@ Pnrd::Pnrd(Reader* readerPointer, uint8_t num_of_places, uint8_t num_of_transiti
 Pnrd::~Pnrd() {
 	if (hasTagHistory) {
 		free(tagHistory);
+	}
+	if (hasGoalToken) {
+		free(goalToken);
 	}
 }
 
@@ -158,6 +167,37 @@ void Pnrd::removeLastTagHistoryEntry() {
 	}
 }
 
+bool Pnrd::setGoalToken(GoalTokenEntry * vector, uint8_t goalTokenSize) {
+	bool noError = true;
+	for (uint8_t index = 0; index < goalTokenSize; index++) {
+		GoalToken[index] = vector[index];
+	}
+
+	return noError;
+}
+
+uint8_t Pnrd::getGoalToken(GoalTokenEntry * vector) {
+	uint8_t index = 0;	
+
+	for (uint8_t counter = 0; counter < GoalTokenIndex; index++, counter++) {
+		if (!(GoalToken[index].Place == 0xFF)) {
+			vector[index] = GoalToken[index];
+			index++;
+		}
+	}
+
+	return index;
+}
+
+GoalTokenEntry* Pnrd::getGoalTokenPointer() {	
+	return goalToken;
+}
+
+uint8_t* Pnrd::getGoalTokenIndexPointer() {
+	return &goalTokenIndex;
+}
+
+
 FireError Pnrd::fire() {
 	FireError fireError = this->PetriNet::fire();
 	saveTagHistory();
@@ -180,6 +220,15 @@ void Pnrd::preparePnrdMemoryStack() {
 			tagHistory[count] = entry;
 		}
 		tagHistoryIndex = 0;
+	}
+	if (hasGoalToken) {
+		goalToken = (GoalTokenEntry*)malloc(sizeof(GoalTokenEntry)* goalTokenSize);
+		for (uint8_t count = 0; count < goalTokenSize; count++) {
+			GoalTokenEntry entry;
+			entry.Place = 0xFF;
+			goalToken[count] = entry;
+		}
+		goalTokenIndex = 0;
 	}
 }
 
