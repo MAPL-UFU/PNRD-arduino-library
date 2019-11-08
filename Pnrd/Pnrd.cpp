@@ -185,12 +185,12 @@ void Pnrd::getGoalToken(uint16_t* vector) {
 }
 
 
-uint16_t * PetriNet::getGoalTokenPointer()
+uint16_t * Pnrd::getGoalTokenPointer()
 {
 	return TokenVector;
 }
 
-void PetriNet::printGoalToken() {	
+void Pnrd::printGoalToken() {	
 	print("Token Vector:\n\n");
 
 	for (int32_t counter = 0; counter< goalTokenSize; counter++) {
