@@ -67,7 +67,7 @@ private:
 public:
 	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
-	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, uint8_t goal_token_size);
+	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasGoalToken);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions);
 	PetriNet(uint8_t num_places, uint8_t num_transitions);
 	~PetriNet();
@@ -76,7 +76,6 @@ public:
 	uint8_t  getNumberOfTransitions();
 	uint8_t  getNumberMaxOfInputs();
 	uint8_t	 getNumberMaxOfOutputs();
-	uint8_t  getSizeOfGoalToken();
 	
 	void  setFireVector(uint16_t* vector);
 	void  getFireVector(uint16_t* vector);

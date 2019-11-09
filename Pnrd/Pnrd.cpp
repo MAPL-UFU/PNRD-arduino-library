@@ -22,7 +22,7 @@ Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, 
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
-Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory,uint8_t goal_token_size) : PetriNet(num_places, num_transitions, hasConditions, goal_token_size) {
+Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory,bool hasGoalToken) : PetriNet(num_places, num_transitions, hasConditions, hasGoalToken) {
 	this->hasTagHistory = hasTagHistory;
 	reader = readerPointer;
 	preparePnrdMemoryStack();
