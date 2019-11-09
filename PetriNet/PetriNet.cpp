@@ -23,6 +23,7 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_
 	prepareMemoryStack();	
 }
 
+
 PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions) {
 	this->hasConditions = hasConditions;
 
@@ -34,18 +35,8 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditio
 
 	prepareMemoryStack();
 }
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions) {
-	this->hasConditions = hasConditions;
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, uint8_t goal_token_size) {
 
-	this->NumberOfPlaces = num_places;
-	this->NumberOfTransitions = num_transitions;
-
-	this->NumberMaxOfInputs = num_places;
-	this->NumberMaxOfOutputs = num_places;
-
-	prepareMemoryStack();
-}
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions,uint8_t goal_token_size) {
 	this->hasConditions = hasConditions;
 	this->GoalTokenSize = goal_token_size;
 	this->NumberOfPlaces = num_places;
