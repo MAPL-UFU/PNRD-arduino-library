@@ -16,19 +16,18 @@ Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, 
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
-Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, bool hasGoalToken) : PetriNet(num_places, num_transitions, hasConditions) {
-	this->hasGoalToken = hasGoalToken;
-	this->hasTagHistory = hasTagHistory;
-	this->goalTokenSize = num_places;
-	reader = readerPointer;
-	preparePnrdMemoryStack();
-}
 
 Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory) : PetriNet(num_places, num_transitions, hasConditions) {
 	this->hasTagHistory = hasTagHistory;
 	reader = readerPointer;
 	preparePnrdMemoryStack();
 }
+Pnrd::Pnrd(Reader * readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory,uint8_t goal_token_size) : PetriNet(num_places, num_transitions, hasConditions, goal_token_size) {
+	this->hasTagHistory = hasTagHistory;
+	reader = readerPointer;
+	preparePnrdMemoryStack();
+}
+
 
 Pnrd::Pnrd(Reader* readerPointer, uint8_t num_of_places, uint8_t num_of_transitions) :PetriNet(num_of_places, num_of_transitions) {
 	reader = readerPointer;
@@ -39,9 +38,6 @@ Pnrd::Pnrd(Reader* readerPointer, uint8_t num_of_places, uint8_t num_of_transiti
 Pnrd::~Pnrd() {
 	if (hasTagHistory) {
 		free(tagHistory);
-	}
-	if (hasGoalToken) {
-		free(goalToken);
 	}
 }
 
@@ -168,37 +164,6 @@ void Pnrd::removeLastTagHistoryEntry() {
 	}
 }
 
-bool Pnrd::setGoalToken(uint16_t * vector) {
-	bool noError = true;
-	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
-		goalToken[counter] = vector[counter];
-	}
-
-	return noError;
-}
-
-void Pnrd::getGoalToken(uint16_t* vector) {
-	for (uint8_t counter = 0; counter < goalTokenSize; counter++) {
-			vector[counter] = goalToken[counter];
-
-	}
-}
-
-
-uint16_t * Pnrd::getGoalTokenPointer()
-{
-	return goalToken;
-}
-
-void Pnrd::printGoalToken() {	
-	print("Token Vector:\n\n");
-
-	for (int32_t counter = 0; counter< goalTokenSize; counter++) {
-		print(goalToken[counter]);
-		print('\n');		
-	}
-	print('\n');
-}
 
 
 FireError Pnrd::fire() {
@@ -223,9 +188,6 @@ void Pnrd::preparePnrdMemoryStack() {
 			tagHistory[count] = entry;
 		}
 		tagHistoryIndex = 0;
-	}
-	if (hasGoalToken) {
-		goalToken = (uint16_t*)malloc(sizeof(uint16_t)* goalTokenSize);
 	}
 }
 

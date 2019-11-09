@@ -58,10 +58,6 @@ class Reader;
 
 class Pnrd : public PetriNet {
 
-protected:
-	uint8_t   goalTokenSize;
-	uint16_t* goalToken;
-
 private:
 	Reader*	 reader;
 	uint8_t dataInTag;
@@ -74,9 +70,6 @@ private:
 
 	bool hasTagHistory;
 
-
-
-	bool hasGoalToken;
 	
 
 private:
@@ -88,7 +81,7 @@ private:
 public:
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
-	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, bool hasGoalToken);
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, uint8_t goal_token_size);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions);
 	~Pnrd();
@@ -116,11 +109,6 @@ public:
 
 	void  addTagHistoryEntry(TagHistoryEntry entry);
 	void  removeLastTagHistoryEntry();
-	
-	bool  setGoalToken(uint16_t* vector);
-	void getGoalToken(uint16_t* vector);
-	uint16_t*  getGoalTokenPointer();
-	void  printGoalToken();
 
 	FireError fire();
 	FireError fire(uint8_t transition);

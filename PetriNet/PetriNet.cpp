@@ -34,6 +34,28 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditio
 
 	prepareMemoryStack();
 }
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions) {
+	this->hasConditions = hasConditions;
+
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_places;
+	this->NumberMaxOfOutputs = num_places;
+
+	prepareMemoryStack();
+}
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions,uint8_t goal_token_size) {
+	this->hasConditions = hasConditions;
+	this->GoalTokenSize = goal_token_size;
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_places;
+	this->NumberMaxOfOutputs = num_places;
+
+	prepareMemoryStack();
+}
 
 PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions) {
 	this->NumberOfPlaces = num_places;
@@ -51,6 +73,7 @@ PetriNet::~PetriNet() {
 	free(FireVector);
 	free(AdjacencyList);
 	free(Conditions);
+	free(GoalToken);
 }
 
 //Public methods
@@ -127,7 +150,35 @@ void PetriNet::printTokenVector() {
 
 	print('\n');
 }
+//-------------------------------------New Include-----------------------------------------------------
+void PetriNet::setGoalToken(uint16_t*  vector) {
+	for (uint8_t count = 0; count < GoalTokenSize; count++) {
+		GoalToken[count] = vector[count];
+	}
+}
 
+void PetriNet::getGoalToken(uint16_t* vector) {
+	for (uint8_t count = 0; count < GoalTokenSize; count++) {
+		vector[count] = GoalToken[count];
+	}
+}
+
+uint16_t * PetriNet::getGoalTokenPointer()
+{
+	return GoalToken;
+}
+
+void PetriNet::printGoalToken() {	
+	print("Goal Token:\n\n");
+
+	for (int32_t count = 0; count < GoalTokenSize; count++) {
+		print(GoalToken[count]);
+		print('\n');		
+	}
+
+	print('\n');
+}
+//-------------------------------------------------------------------------------------------
 bool PetriNet::setIncidenceMatrix(int8_t* matrix) {
 	bool noError = true;
 
@@ -636,6 +687,7 @@ FireError PetriNet::isTriggerable() {
 void PetriNet::prepareMemoryStack() {
 	TokenVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfPlaces);
 	FireVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfTransitions);
+	GoalToken = (uint16_t*)malloc(sizeof(uint16_t)*GoalTokenSize);
 
 	uint16_t sizeOfAdjacencyList = (NumberMaxOfInputs + NumberMaxOfOutputs) * NumberOfTransitions;
 	AdjacencyList = (uint8_t*)malloc(sizeof(uint8_t)* sizeOfAdjacencyList);

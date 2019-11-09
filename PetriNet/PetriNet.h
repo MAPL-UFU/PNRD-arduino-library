@@ -42,9 +42,10 @@ protected:
 	uint16_t*  TokenVector;
 	uint16_t*  FireVector;
 	uint8_t*   Conditions;	
-	
+	uint16_t*  GoalToken;
 	bool	   hasConditions = false;	
 	
+	uint8_t   GoalTokenSize;
 	uint8_t   NumberOfPlaces;
 	uint8_t   NumberOfTransitions;
 	uint8_t   NumberMaxOfInputs; 
@@ -84,6 +85,11 @@ public:
 	void  getTokenVector(uint16_t* vector);
 	uint16_t*  getTokenVectorPointer();
 	void  printTokenVector();
+
+	void  setGoalToken(uint16_t* vector);
+	void  getGoalToken(uint16_t* vector);
+	uint16_t*  getGoalTokenPointer();
+	void  printGoalToken();
 
 	bool setIncidenceMatrix(int8_t* matrix);
 	void getIncidenceMatrix(int8_t* matrix);
