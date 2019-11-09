@@ -67,6 +67,7 @@ private:
 public:
 	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
+	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, uint8_t goal_token_size);
 	PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions);
 	PetriNet(uint8_t num_places, uint8_t num_transitions);
 	~PetriNet();
