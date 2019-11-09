@@ -164,7 +164,7 @@ void PetriNet::printGoalToken() {
 	print("Goal Token:\n\n");
 
 	for (int32_t count = 0; count < NumberOfPlaces; count++) {
-		Serial.println(GoalToken[count])
+		Serial.println(GoalToken[count]);
 		print(GoalToken[count]);
 		print('\n');		
 	}
