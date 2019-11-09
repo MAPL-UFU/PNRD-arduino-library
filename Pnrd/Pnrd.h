@@ -60,7 +60,7 @@ class Pnrd : public PetriNet {
 
 protected:
 	uint8_t   goalTokenSize;
-
+	uint16_t* goalToken;
 
 private:
 	Reader*	 reader;
@@ -74,7 +74,7 @@ private:
 
 	bool hasTagHistory;
 
-	uint16_t* goalToken;
+
 
 	bool hasGoalToken;
 	
