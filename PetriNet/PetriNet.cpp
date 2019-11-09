@@ -162,9 +162,9 @@ uint16_t * PetriNet::getGoalTokenPointer()
 
 void PetriNet::printGoalToken() {	
 	print("Goal Token:\n\n");
-		for (int8_t count = 0; count < NumberOfPlaces; count++) {
-			PetriNet::print(GoalToken[count]);
+		for (int32_t count = 0; count < NumberOfPlaces; count++) {
 			Serial.println(GoalToken[count]);
+			PetriNet::print(GoalToken[count]);
 			print('\n');		
 	}
 
@@ -703,12 +703,14 @@ void PetriNet::prepareMemoryStack() {
 //Protected Methods
 void PetriNet::print(char toPrint) {
 	platformInterface->print(toPrint);	
+	Serial.println('char');
 }
 
 void PetriNet::print(uint8_t toPrint) {
 	for (uint8_t base = 100; base >= 1; base = base/10) {
 		uint8_t num = toPrint / base;
 		if (base == 1 || num != 0) {
+						Serial.println('uint8_t');
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
@@ -726,10 +728,23 @@ void PetriNet::print(uint16_t toPrint) {
 	}
 }
 
+void PetriNet::print(uint16_t * toPrint) {
+	for (uint16_t base = 10000; base >= 1; base = base / 10) {
+		uint16_t num = toPrint / base;
+		if (base == 1 || num != 0) {
+			Serial.println('uint16_t*');
+			platformInterface->print('0' + num);
+		}
+		toPrint = toPrint % base;
+	}
+}
+
+
 void PetriNet::print(uint32_t toPrint) {
 	for (uint32_t base = 1000000000; base >= 1; base = base / 10) {
 		uint32_t num = toPrint / base;
 		if (base == 1 || num != 0) {
+			Serial.println('uint32_t');
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
@@ -738,7 +753,7 @@ void PetriNet::print(uint32_t toPrint) {
 
 void PetriNet::print(char* toPrint) {
 	uint8_t counter = 0;
-
+				Serial.println('char');
 	while(toPrint[counter] != '\0'){
 		platformInterface->print(toPrint[counter]);
 		counter++;
