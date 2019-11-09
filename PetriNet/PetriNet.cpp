@@ -707,10 +707,11 @@ void PetriNet::print(char toPrint) {
 }
 
 void PetriNet::print(uint8_t toPrint) {
-	Serial.println('b');
+	
 	for (uint8_t base = 100; base >= 1; base = base/10) {
 		uint8_t num = toPrint / base;
 		if (base == 1 || num != 0) {
+			Serial.println('b');
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
@@ -718,10 +719,10 @@ void PetriNet::print(uint8_t toPrint) {
 }
 
 void PetriNet::print(uint16_t toPrint) {
-	Serial.println('c');
 	for (uint16_t base = 10000; base >= 1; base = base / 10) {
 		uint16_t num = toPrint / base;
 		if (base == 1 || num != 0) {
+			Serial.println('c');
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
@@ -729,10 +730,10 @@ void PetriNet::print(uint16_t toPrint) {
 }
 
 void PetriNet::print(uint32_t toPrint) {
-	Serial.println('d');
 	for (uint32_t base = 1000000000; base >= 1; base = base / 10) {
 		uint32_t num = toPrint / base;
 		if (base == 1 || num != 0) {
+			Serial.println('d');
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
@@ -740,9 +741,9 @@ void PetriNet::print(uint32_t toPrint) {
 }
 
 void PetriNet::print(char* toPrint) {
-	Serial.println('e');
 	uint8_t counter = 0;
 	while(toPrint[counter] != '\0'){
+		Serial.println('e');
 		platformInterface->print(toPrint[counter]);
 		counter++;
 	}
