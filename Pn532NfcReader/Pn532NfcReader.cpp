@@ -237,7 +237,9 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 	index++;
 	payload[index] = pnrd->getNumberOfTransitions();
 	index++;
-	
+	payload[index] = pnrd->getGoalTokenPointer();
+	index++;
+
 	if (pnrd->isTagInformation(PetriNetInformation::TOKEN_VECTOR)) {
 		size =  sizeof(uint16_t)* pnrd->getNumberOfPlaces();
 		for(uint16_t counter = 0; counter < size ; counter++) {
