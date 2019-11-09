@@ -193,7 +193,7 @@ uint16_t * Pnrd::getGoalTokenPointer()
 void Pnrd::printGoalToken() {	
 	print("Token Vector:\n\n");
 
-	for (int8_t counter = 0; counter< goalTokenSize; counter++) {
+	for (int32_t counter = 0; counter< goalTokenSize; counter++) {
 		print(goalToken[counter]);
 		print('\n');		
 	}
