@@ -162,10 +162,16 @@ uint16_t * PetriNet::getGoalTokenPointer()
 
 void PetriNet::printGoalToken() {	
 	print("Goal Token:\n\n");
-
-	for (int32_t count = 0; count < NumberOfPlaces; count++) {
+		for (int8_t count = 0; count < NumberOfPlaces; count++) {
+			for (uint16_t base = 10000; base >= 1; base = base / 10) {
+				uint16_t num = GoalToken[count] / base;
+				if (base == 1 || num != 0) {
+					platformInterface->print('0' + num);
+				}
+				GoalToken[count] = GoalToken[count] % base;
+			}
+		}
 		Serial.println(GoalToken[count]);
-		print(GoalToken[count]);
 		print('\n');		
 	}
 
