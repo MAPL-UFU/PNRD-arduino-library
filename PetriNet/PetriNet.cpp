@@ -85,6 +85,10 @@ uint8_t PetriNet::getNumberMaxOfOutputs()
 {
 	return NumberMaxOfOutputs;
 }
+//Public methods
+uint8_t PetriNet::getSizeOfGoalToken() {
+	return GoalTokenSize;
+}
 
 void PetriNet::setFireVector(uint16_t*  vector)
 {

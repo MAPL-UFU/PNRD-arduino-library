@@ -89,6 +89,10 @@ WriteError Pn532NfcReader::write(Pnrd* pnrd){
 			size +=  2;
 			size +=  sizeof(TagHistoryEntry) * MAX_NUM_OF_TAG_HISTORY_ENTRIES;
 		}
+
+		if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
+			size += sizeof(uint16_t) * pnrd->getSizeOfGoalToken();
+		}
 		
 		if(size > 1024){
 			return WriteError::NOT_ENOUGH_SPACE;
@@ -206,6 +210,14 @@ ReadError Pn532NfcReader::getInformation(byte* payload,Pnrd * pnrd) {
 			index++;
 		}
 	}
+
+	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
+		size = sizeof(uint16_t) * pnrd->getSizeOfGoalToken();
+		for(uint16_t counter = 0; counter < size ; counter++) {
+			((byte*)pnrd->getGoalTokenPointer())[counter] =  payload[index];
+			index++;
+		}
+	}
 	
 	return ReadError::NO_ERROR;
 }
@@ -273,6 +285,13 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 			payload[index] = pointer[counter];
 			index++;
 		}	
+	}
+	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
+		size =  sizeof(uint16_t)* pnrd->getSizeOfGoalToken();
+		for(uint16_t counter = 0; counter < size ; counter++) {
+			payload[index] = ((byte*) pnrd->getGoalTokenPointer())[counter];
+			index++;
+		}
 	}
 
 	return WriteError::NO_ERROR;

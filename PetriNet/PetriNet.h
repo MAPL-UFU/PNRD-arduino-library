@@ -76,7 +76,8 @@ public:
 	uint8_t  getNumberOfTransitions();
 	uint8_t  getNumberMaxOfInputs();
 	uint8_t	 getNumberMaxOfOutputs();
-
+	uint8_t  getSizeOfGoalToken();
+	
 	void  setFireVector(uint16_t* vector);
 	void  getFireVector(uint16_t* vector);
 	uint16_t*  getFireVectorPointer();
