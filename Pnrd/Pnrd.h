@@ -83,7 +83,7 @@ private:
 public:
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, bool hasTagHistory);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs);
-	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, uint8_t goal_token_size);
+	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory, bool hasGoalToken);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasTagHistory);
 	Pnrd(Reader* readerPointer, uint8_t num_places, uint8_t num_transitions);
 	~Pnrd();

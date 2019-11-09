@@ -679,8 +679,7 @@ FireError PetriNet::isTriggerable() {
 void PetriNet::prepareMemoryStack() {
 	TokenVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfPlaces);
 	FireVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfTransitions);
-	GoalToken = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfPlaces);
-
+	
 	uint16_t sizeOfAdjacencyList = (NumberMaxOfInputs + NumberMaxOfOutputs) * NumberOfTransitions;
 	AdjacencyList = (uint8_t*)malloc(sizeof(uint8_t)* sizeOfAdjacencyList);
 	OutputListAuxiliarPointer = AdjacencyList + (NumberMaxOfInputs * NumberOfTransitions);
@@ -695,6 +694,9 @@ void PetriNet::prepareMemoryStack() {
 		for (uint8_t conditionsIndex = 0; conditionsIndex < sizeOfConditions; conditionsIndex++) {
 			Conditions[conditionsIndex] = 0xFF; //Set all conditions to true;
 		}
+	}
+	if (hasGoalToken) {
+		GoalToken = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfPlaces);
 	}
 }
 
