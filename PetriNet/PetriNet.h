@@ -60,7 +60,7 @@ protected:
 	void print(uint16_t toPrint);
 	void print(uint32_t toPrint);
 	void print(char * toPrint);
-	void print(uint16_t * toPrint);
+
 private:
 	void prepareMemoryStack();	
 

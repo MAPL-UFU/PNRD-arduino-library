@@ -728,18 +728,6 @@ void PetriNet::print(uint16_t toPrint) {
 	}
 }
 
-void PetriNet::print(uint16_t * toPrint) {
-	for (uint16_t base = 10000; base >= 1; base = base / 10) {
-		uint16_t num = toPrint / base;
-		if (base == 1 || num != 0) {
-			Serial.println('uint16_t*');
-			platformInterface->print('0' + num);
-		}
-		toPrint = toPrint % base;
-	}
-}
-
-
 void PetriNet::print(uint32_t toPrint) {
 	for (uint32_t base = 1000000000; base >= 1; base = base / 10) {
 		uint32_t num = toPrint / base;
