@@ -45,7 +45,7 @@ protected:
 	uint16_t*  GoalToken;
 	bool	   hasConditions = false;	
 	
-	uint8_t   GoalTokenSize;
+	bool	  hasGoalToken = false;
 	uint8_t   NumberOfPlaces;
 	uint8_t   NumberOfTransitions;
 	uint8_t   NumberMaxOfInputs; 
