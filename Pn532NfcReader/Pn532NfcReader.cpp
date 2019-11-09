@@ -211,8 +211,6 @@ ReadError Pn532NfcReader::getInformation(byte* payload,Pnrd * pnrd) {
 		}
 	}
 
-
-
 	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
 		size = sizeof(uint16_t) * pnrd->getNumberOfPlaces();
 		for(uint16_t counter = 0; counter < size ; counter++) {

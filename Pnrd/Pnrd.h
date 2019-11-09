@@ -13,8 +13,8 @@ enum class PetriNetInformation {
 	ADJACENCY_LIST = 1,
 	FIRE_VECTOR = 2,
 	CONDITIONS = 3,  
-	TAG_HISTORY = 4,
-	GOAL_TOKEN = 5,
+	GOAL_TOKEN = 4,
+	TAG_HISTORY = 5,
 };
 
 enum class ReadError {
@@ -51,10 +51,6 @@ struct TagHistoryEntry {
 	uint16_t Tokens = 0;
 	uint32_t TimeStamp = 0;
 };
-struct GoalTokenEntry {	
-	uint16_t Tokens = 0;
-};
-
 
 class Reader;
 
