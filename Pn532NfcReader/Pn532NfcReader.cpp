@@ -38,7 +38,7 @@ ReadError  Pn532NfcReader::read(Pnrd* pnrd){
 						byte uid[uidLength];
 						tag.getUid(uid, uidLength);
 						//Stores only the two last hex values of the uid as the tag id;
-						pnrd->setTagId(uid[uidLength - 2]);	
+						pnrd->setTagId(uid[uidLength]);	
 				
 						return getInformation( payload, pnrd);
 				}				
