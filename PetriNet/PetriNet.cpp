@@ -710,7 +710,7 @@ void PetriNet::print(uint8_t toPrint) {
 	for (uint8_t base = 100; base >= 1; base = base/10) {
 		uint8_t num = toPrint / base;
 		if (base == 1 || num != 0) {
-						Serial.println('uint8_t');
+			Serial.println('uint8_t');
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
