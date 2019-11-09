@@ -210,6 +210,12 @@ ReadError Pn532NfcReader::getInformation(byte* payload,Pnrd * pnrd) {
 			index++;
 		}
 	}
+	
+	uint8_t size = (uint8_t) payload[index];
+	index++;	
+	if (size != pnrd->getSizeOfGoalToken()) {		
+		return ReadError::ERROR_GET_GOAL_TOKEN;
+	}
 
 	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
 		size = sizeof(uint16_t) * pnrd->getSizeOfGoalToken();
@@ -230,15 +236,13 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 
 	payload[index] = version;
 	index++;
-	
 	payload[index] = pnrd->getDataInTag()[0];
 	index++;
 	payload[index] = pnrd->getNumberOfPlaces();
 	index++;
 	payload[index] = pnrd->getNumberOfTransitions();
 	index++;
-	payload[index] = pnrd->getGoalTokenPointer();
-	index++;
+
 
 	if (pnrd->isTagInformation(PetriNetInformation::TOKEN_VECTOR)) {
 		size =  sizeof(uint16_t)* pnrd->getNumberOfPlaces();
@@ -288,6 +292,9 @@ WriteError Pn532NfcReader::setInformation(byte* payload, Pnrd *pnrd) {
 			index++;
 		}	
 	}
+	payload[index] = pnrd->getSizeOfGoalToken();
+	index++;
+
 	if (pnrd->isTagInformation(PetriNetInformation::GOAL_TOKEN)) {
 		size =  sizeof(uint16_t)* pnrd->getSizeOfGoalToken();
 		for(uint16_t counter = 0; counter < size ; counter++) {
