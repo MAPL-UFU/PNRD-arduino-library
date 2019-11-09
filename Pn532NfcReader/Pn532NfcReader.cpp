@@ -210,8 +210,8 @@ ReadError Pn532NfcReader::getInformation(byte* payload,Pnrd * pnrd) {
 			index++;
 		}
 	}
-	
-	uint8_t size = (uint8_t) payload[index];
+
+	size = (uint8_t) payload[index];
 	index++;	
 	if (size != pnrd->getSizeOfGoalToken()) {		
 		return ReadError::ERROR_GET_GOAL_TOKEN;
