@@ -37,15 +37,16 @@ ReadError  Pn532NfcReader::read(Pnrd* pnrd){
 						int uidLength = tag.getUidLength();
 						byte uid[uidLength];
 						tag.getUid(uid, uidLength);					
-
+						
+						//Create uint32_t for store concatenated HEX
 						uint32_t bignum = 0;
+						//create charTagId for Concate Hex byte
 						String charTagId ;
 						for(uint8_t index = 0; index < uidLength; index++){
 							charTagId += String(uid[index],HEX);
 						}
-						Serial.println(charTagId);
+						//Convert String to Uint32_t HEX
 						bignum = strtoul(charTagId.c_str(), NULL, 16);
-						Serial.println(bignum,HEX);
 						//Stores only the two last hex values of the uid as the tag id;
 						pnrd->setTagId(bignum);	
 				
