@@ -2,36 +2,11 @@
 
 //Constructors
 
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, uint8_t goal_token_size) {
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions, uint8_t goal_token_size)
+{
 
 	this->hasConditions = hasConditions;
-	
-	this->NumberOfPlaces = num_places;
-	this->NumberOfTransitions = num_transitions;
 
-	this->NumberMaxOfInputs = num_max_of_inputs;
-	this->NumberMaxOfOutputs = num_max_of_outputs;
-
-
-	this->GoalTokenSize = goal_token_size;
-
-	prepareMemoryStack();
-}
-
-
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions) {
-	this->hasConditions = hasConditions;
-	
-	this->NumberOfPlaces = num_places;
-	this->NumberOfTransitions = num_transitions;
-
-	this->NumberMaxOfInputs = num_max_of_inputs;
-	this->NumberMaxOfOutputs = num_max_of_outputs;
-
-	prepareMemoryStack();
-}
-
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, uint8_t goal_token_size) {
 	this->NumberOfPlaces = num_places;
 	this->NumberOfTransitions = num_transitions;
 
@@ -40,37 +15,48 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_
 
 	this->GoalTokenSize = goal_token_size;
 
-	prepareMemoryStack();	
+	prepareMemoryStack();
 }
 
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, bool hasConditions)
+{
+	this->hasConditions = hasConditions;
 
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs) {
 	this->NumberOfPlaces = num_places;
 	this->NumberOfTransitions = num_transitions;
 
 	this->NumberMaxOfInputs = num_max_of_inputs;
 	this->NumberMaxOfOutputs = num_max_of_outputs;
 
-	prepareMemoryStack();	
+	prepareMemoryStack();
 }
 
-
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, uint8_t goal_token_size) {
-	this->hasConditions = hasConditions;
-
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs, uint8_t goal_token_size)
+{
 	this->NumberOfPlaces = num_places;
 	this->NumberOfTransitions = num_transitions;
 
-	this->NumberMaxOfInputs = num_places;
-	this->NumberMaxOfOutputs = num_places;	
+	this->NumberMaxOfInputs = num_max_of_inputs;
+	this->NumberMaxOfOutputs = num_max_of_outputs;
 
 	this->GoalTokenSize = goal_token_size;
 
 	prepareMemoryStack();
 }
 
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t num_max_of_inputs, uint8_t num_max_of_outputs)
+{
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
 
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions) {
+	this->NumberMaxOfInputs = num_max_of_inputs;
+	this->NumberMaxOfOutputs = num_max_of_outputs;
+
+	prepareMemoryStack();
+}
+
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions)
+{
 	this->hasConditions = hasConditions;
 
 	this->NumberOfPlaces = num_places;
@@ -81,21 +67,35 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditio
 
 	prepareMemoryStack();
 }
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, bool hasConditions, bool hasGoalToken)
+{
 
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t goal_token_size) {
+	this->hasConditions = hasConditions;
+	this->hasGoalToken = hasGoalToken;
 	this->NumberOfPlaces = num_places;
 	this->NumberOfTransitions = num_transitions;
 
 	this->NumberMaxOfInputs = num_places;
 	this->NumberMaxOfOutputs = num_places;
 
+	prepareMemoryStack();
+}
+
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions, uint8_t goal_token_size)
+{
+	this->NumberOfPlaces = num_places;
+	this->NumberOfTransitions = num_transitions;
+
+	this->NumberMaxOfInputs = num_places;
+	this->NumberMaxOfOutputs = num_places;
 
 	this->GoalTokenSize = goal_token_size;
 
 	prepareMemoryStack();
 }
 
-PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions) {
+PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions)
+{
 	this->NumberOfPlaces = num_places;
 	this->NumberOfTransitions = num_transitions;
 
@@ -106,7 +106,8 @@ PetriNet::PetriNet(uint8_t num_places, uint8_t num_transitions) {
 }
 
 //Destructor
-PetriNet::~PetriNet() {
+PetriNet::~PetriNet()
+{
 	free(TokenVector);
 	free(FireVector);
 	free(AdjacencyList);
@@ -115,11 +116,13 @@ PetriNet::~PetriNet() {
 }
 
 //Public methods
-uint8_t PetriNet::getNumberOfPlaces() {
+uint8_t PetriNet::getNumberOfPlaces()
+{
 	return NumberOfPlaces;
 }
 
-uint8_t PetriNet::getNumberOfTransitions() {
+uint8_t PetriNet::getNumberOfTransitions()
+{
 	return NumberOfTransitions;
 }
 
@@ -132,107 +135,133 @@ uint8_t PetriNet::getNumberMaxOfOutputs()
 {
 	return NumberMaxOfOutputs;
 }
+//Public methods
 
 uint8_t PetriNet::getGoalTokenSize()
 {
 	return GoalTokenSize;
 }
 
-
-void PetriNet::setFireVector(uint16_t*  vector)
+void PetriNet::setFireVector(uint16_t *vector)
 {
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		FireVector[transition] = vector[transition];
-	}	
+	}
 }
 
-void PetriNet::getFireVector(uint16_t* vector) {
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-			vector[transition] = FireVector[transition];
-	}	
+void PetriNet::getFireVector(uint16_t *vector)
+{
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
+		vector[transition] = FireVector[transition];
+	}
 }
 
-uint16_t* PetriNet::getFireVectorPointer() {
+uint16_t *PetriNet::getFireVectorPointer()
+{
 	return FireVector;
 }
 
-void PetriNet::printFireVector() {
+void PetriNet::printFireVector()
+{
 	print("Fire Vector:\n\n");
-	
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		print(FireVector[transition]);
-		print('\n');	
+		print('\n');
 	}
 
 	print('\n');
 }
 
-void PetriNet::setTokenVector(uint16_t*  vector) {
-	for (uint8_t place = 0; place < NumberOfPlaces; place++) {
+void PetriNet::setTokenVector(uint16_t *vector)
+{
+	for (uint8_t place = 0; place < NumberOfPlaces; place++)
+	{
 		TokenVector[place] = vector[place];
 	}
 }
 
-void PetriNet::getTokenVector(uint16_t* vector) {
-	for (uint8_t place = 0; place < NumberOfPlaces; place++) {
+void PetriNet::getTokenVector(uint16_t *vector)
+{
+	for (uint8_t place = 0; place < NumberOfPlaces; place++)
+	{
 		vector[place] = TokenVector[place];
 	}
 }
 
-uint16_t * PetriNet::getTokenVectorPointer()
+uint16_t *PetriNet::getTokenVectorPointer()
 {
 	return TokenVector;
 }
 
-void PetriNet::printTokenVector() {	
+void PetriNet::printTokenVector()
+{
 	print("Token Vector:\n\n");
 
-	for (int32_t place = 0; place < NumberOfPlaces; place++) {
+	for (int32_t place = 0; place < NumberOfPlaces; place++)
+	{
 		print(TokenVector[place]);
-		print('\n');		
+		print('\n');
 	}
 
 	print('\n');
 }
-
-
-
-
-void PetriNet::setGoalToken(uint8_t*  vector) {
-	for (uint8_t place = 0; place < GoalTokenSize; place++) {
-		 GoalToken[place]= vector[place];
+//-------------------------------------New Include-----------------------------------------------------
+void PetriNet::setGoalToken(uint16_t *vector)
+{
+	for (uint8_t count = 0; count < NumberOfPlaces; count++)
+	{
+		GoalToken[count] = vector[count];
 	}
 }
 
-void PetriNet::getGoalToken(uint8_t* vector) {
-	for (uint8_t place = 0; place < GoalTokenSize; place++) {
-		vector[place] = GoalToken[place];
+void PetriNet::getGoalToken(uint16_t *vector)
+{
+	for (uint8_t count = 0; count < NumberOfPlaces; count++)
+	{
+		vector[count] = GoalToken[count];
 	}
 }
 
-uint8_t * PetriNet::getGoalTokenPointer()
+uint16_t *PetriNet::getGoalTokenPointer()
 {
 	return GoalToken;
 }
 
-
-
-
-
-bool PetriNet::setIncidenceMatrix(int8_t* matrix) {
+void PetriNet::printGoalToken()
+{
+	print("Goal Token:\n\n");
+	for (int32_t count = 0; count < NumberOfPlaces; count++)
+	{
+		print(GoalToken[count]);
+		print('\n');
+	}
+	print('\n');
+}
+//-------------------------------------------------------------------------------------------
+bool PetriNet::setIncidenceMatrix(int8_t *matrix)
+{
 	bool noError = true;
 
 	uint8_t sizeOfAdjacencyList = (NumberMaxOfInputs + NumberMaxOfOutputs) * NumberOfTransitions;
-	for (uint8_t listIndex = 0; listIndex < sizeOfAdjacencyList; listIndex++) {
+	for (uint8_t listIndex = 0; listIndex < sizeOfAdjacencyList; listIndex++)
+	{
 		AdjacencyList[listIndex] = 0xFF;
 	}
 
-	for (uint8_t place = 0; place < NumberOfPlaces; place++) {
-		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-			if (matrix[place*NumberOfTransitions + transition] == 1) {
+	for (uint8_t place = 0; place < NumberOfPlaces; place++)
+	{
+		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+		{
+			if (matrix[place * NumberOfTransitions + transition] == 1)
+			{
 				noError &= addOutput(place, transition);
 			}
-			else if (matrix[place*NumberOfTransitions + transition] == -1) {
+			else if (matrix[place * NumberOfTransitions + transition] == -1)
+			{
 				noError &= addInput(place, transition);
 			}
 		}
@@ -241,58 +270,78 @@ bool PetriNet::setIncidenceMatrix(int8_t* matrix) {
 	return noError;
 }
 
-void PetriNet::getIncidenceMatrix(int8_t* matrix) {
+void PetriNet::getIncidenceMatrix(int8_t *matrix)
+{
 	uint16_t index;
 
-	for (uint8_t place = 0; place < NumberOfPlaces; place++) {
-		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+	for (uint8_t place = 0; place < NumberOfPlaces; place++)
+	{
+		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+		{
 			index = place * NumberOfTransitions + transition;
 			matrix[index] = 0;
 		}
 	}
 
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
+		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++)
+		{
 			index = transition * NumberMaxOfInputs + inputIndex;
-			if (AdjacencyList[index] == 0xFF) {
+			if (AdjacencyList[index] == 0xFF)
+			{
 				break;
-			} else {
+			}
+			else
+			{
 				matrix[AdjacencyList[index] * NumberOfTransitions + transition] = 1;
 			}
 		}
-	}	
+	}
 
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-		for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfInputs; outputIndex++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
+		for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfInputs; outputIndex++)
+		{
 			index = transition * NumberMaxOfOutputs + outputIndex;
-			if (OutputListAuxiliarPointer[index] == 0xFF) {
+			if (OutputListAuxiliarPointer[index] == 0xFF)
+			{
 				break;
-			} else {
+			}
+			else
+			{
 				matrix[OutputListAuxiliarPointer[index] * NumberOfTransitions + transition] = -1;
 			}
 		}
 	}
 }
 
-int8_t PetriNet::getMatrixElement(int8_t place, int8_t transition) {
+int8_t PetriNet::getMatrixElement(int8_t place, int8_t transition)
+{
 	uint16_t index;
 
-	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++) {
+	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++)
+	{
 		index = transition * NumberMaxOfInputs + inputIndex;
-		if (AdjacencyList[index] == 0xFF) {
+		if (AdjacencyList[index] == 0xFF)
+		{
 			break;
 		}
-		else if (AdjacencyList[index] == place) {
+		else if (AdjacencyList[index] == place)
+		{
 			return -1;
 		}
 	}
 
-	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfInputs; outputIndex++) {
+	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfInputs; outputIndex++)
+	{
 		index = transition * NumberMaxOfOutputs + outputIndex;
-		if (OutputListAuxiliarPointer[index] == 0xFF) {
+		if (OutputListAuxiliarPointer[index] == 0xFF)
+		{
 			break;
 		}
-		else if (OutputListAuxiliarPointer[index] == place) {
+		else if (OutputListAuxiliarPointer[index] == place)
+		{
 			return 1;
 		}
 	}
@@ -300,21 +349,25 @@ int8_t PetriNet::getMatrixElement(int8_t place, int8_t transition) {
 	return 0;
 }
 
-void PetriNet::printIncidenceMatrix() {	
-	print("Incidence Matrix: \n\n");	
+void PetriNet::printIncidenceMatrix()
+{
+	print("Incidence Matrix: \n\n");
 
-	for (uint8_t place = 0; place < NumberOfPlaces; place++) {
-		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-			switch (getMatrixElement(place, transition)) {
-				case 1:
-					print("1 ");
-					break;
-				case -1:
-					print("-1 ");
-					break;
-				case 0:
-					print("0 ");
-					break;
+	for (uint8_t place = 0; place < NumberOfPlaces; place++)
+	{
+		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+		{
+			switch (getMatrixElement(place, transition))
+			{
+			case 1:
+				print("1 ");
+				break;
+			case -1:
+				print("-1 ");
+				break;
+			case 0:
+				print("0 ");
+				break;
 			}
 		}
 		print('\n');
@@ -323,32 +376,41 @@ void PetriNet::printIncidenceMatrix() {
 	print('\n');
 }
 
-bool PetriNet::addInput(uint8_t place, uint8_t transition){
+bool PetriNet::addInput(uint8_t place, uint8_t transition)
+{
 	uint16_t index = transition * NumberMaxOfInputs;
 
-	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {		
-		if (AdjacencyList[index] == 0xFF) {
-			AdjacencyList[index] = place;			
+	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+	{
+		if (AdjacencyList[index] == 0xFF)
+		{
+			AdjacencyList[index] = place;
 			return true;
 		}
-		else if (AdjacencyList[index] ==  place) {
+		else if (AdjacencyList[index] == place)
+		{
 			return false;
 		}
 	}
 	return false;
 }
 
-bool PetriNet::deleteInput(uint8_t place, uint8_t transition) {
+bool PetriNet::deleteInput(uint8_t place, uint8_t transition)
+{
 	uint16_t index = transition * NumberMaxOfInputs;
 
-	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {		
-		if (AdjacencyList[index] == 0xFF) {
+	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+	{
+		if (AdjacencyList[index] == 0xFF)
+		{
 			return false;
 		}
-		else if (AdjacencyList[index] == place) {
-			for (   ; inputIndex < NumberMaxOfInputs - 1; inputIndex++, index++) {
+		else if (AdjacencyList[index] == place)
+		{
+			for (; inputIndex < NumberMaxOfInputs - 1; inputIndex++, index++)
+			{
 				AdjacencyList[index] = AdjacencyList[index] + 1;
-			}				
+			}
 			AdjacencyList[index] = 0xFF;
 			return true;
 		}
@@ -356,15 +418,19 @@ bool PetriNet::deleteInput(uint8_t place, uint8_t transition) {
 	return false;
 }
 
-bool PetriNet::addOutput(uint8_t place, uint8_t transition) {
+bool PetriNet::addOutput(uint8_t place, uint8_t transition)
+{
 	uint16_t index = transition * NumberMaxOfOutputs;
 
-	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++) {		
-		if (OutputListAuxiliarPointer[index] == 0xFF) {
-			OutputListAuxiliarPointer[index] =	place;			
+	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++)
+	{
+		if (OutputListAuxiliarPointer[index] == 0xFF)
+		{
+			OutputListAuxiliarPointer[index] = place;
 			return true;
 		}
-		else if (OutputListAuxiliarPointer[index] == place) {
+		else if (OutputListAuxiliarPointer[index] == place)
+		{
 			return false;
 		}
 	}
@@ -372,16 +438,21 @@ bool PetriNet::addOutput(uint8_t place, uint8_t transition) {
 	return false;
 }
 
-bool PetriNet::deleteOutput(uint8_t place, uint8_t transition) {
+bool PetriNet::deleteOutput(uint8_t place, uint8_t transition)
+{
 	uint16_t index = transition * NumberMaxOfInputs;
 
-	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfInputs; outputIndex++, index++) {		
-		if (OutputListAuxiliarPointer[index] == 0xFF) {
+	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfInputs; outputIndex++, index++)
+	{
+		if (OutputListAuxiliarPointer[index] == 0xFF)
+		{
 			return false;
 		}
-		else if (OutputListAuxiliarPointer[index] == place) {
-			for (; outputIndex < NumberMaxOfInputs - 1; outputIndex++ , index++) {
-				OutputListAuxiliarPointer[index] = OutputListAuxiliarPointer[index] + 1;				
+		else if (OutputListAuxiliarPointer[index] == place)
+		{
+			for (; outputIndex < NumberMaxOfInputs - 1; outputIndex++, index++)
+			{
+				OutputListAuxiliarPointer[index] = OutputListAuxiliarPointer[index] + 1;
 			}
 			OutputListAuxiliarPointer[index] = 0xFF;
 			return true;
@@ -390,14 +461,19 @@ bool PetriNet::deleteOutput(uint8_t place, uint8_t transition) {
 	return false;
 }
 
-uint8_t PetriNet::getInputs(uint8_t transition, uint8_t * inputs) {
+uint8_t PetriNet::getInputs(uint8_t transition, uint8_t *inputs)
+{
 	uint8_t counter = 0;
 	uint16_t index = transition * NumberMaxOfInputs;
 
-	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {		
-		if (AdjacencyList[index] == 0xFF) {
+	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+	{
+		if (AdjacencyList[index] == 0xFF)
+		{
 			return counter;
-		}else {
+		}
+		else
+		{
 			inputs[counter] = AdjacencyList[index];
 		}
 	}
@@ -405,36 +481,44 @@ uint8_t PetriNet::getInputs(uint8_t transition, uint8_t * inputs) {
 	return counter;
 }
 
-bool PetriNet::setInputs(uint8_t transition, uint8_t * inputs, uint8_t inputsCount) {
+bool PetriNet::setInputs(uint8_t transition, uint8_t *inputs, uint8_t inputsCount)
+{
 	bool noError = true;
 	uint16_t index = transition * NumberMaxOfInputs;
 
-	if (inputsCount > NumberMaxOfInputs) {
+	if (inputsCount > NumberMaxOfInputs)
+	{
 		inputsCount = NumberMaxOfInputs;
 		noError = false;
 	}
 
 	uint8_t inputIndex = 0;
-	for (   ; inputIndex < inputsCount; inputIndex++, index++) {
-		AdjacencyList[index] = inputs[inputIndex];		
+	for (; inputIndex < inputsCount; inputIndex++, index++)
+	{
+		AdjacencyList[index] = inputs[inputIndex];
 	}
 
-	for (   ; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
+	for (; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+	{
 		AdjacencyList[index] = 0xFF;
 	}
-	
+
 	return noError;
 }
 
-uint8_t PetriNet::getOutputs(uint8_t transition, uint8_t * outputs) {
+uint8_t PetriNet::getOutputs(uint8_t transition, uint8_t *outputs)
+{
 	uint8_t counter = 0;
 	uint16_t index = transition * NumberMaxOfOutputs;
 
-	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++) {
-		if (OutputListAuxiliarPointer[index] == 0xFF) {
+	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++)
+	{
+		if (OutputListAuxiliarPointer[index] == 0xFF)
+		{
 			return counter;
 		}
-		else {
+		else
+		{
 			outputs[counter] = OutputListAuxiliarPointer[index];
 		}
 	}
@@ -442,72 +526,91 @@ uint8_t PetriNet::getOutputs(uint8_t transition, uint8_t * outputs) {
 	return counter;
 }
 
-bool PetriNet::setOutputs(uint8_t transition, uint8_t * outputs, uint8_t outputsCount) {
+bool PetriNet::setOutputs(uint8_t transition, uint8_t *outputs, uint8_t outputsCount)
+{
 	bool noError = true;
 	uint16_t index = transition * NumberMaxOfOutputs;
 
-	if (outputsCount > NumberMaxOfOutputs) {
+	if (outputsCount > NumberMaxOfOutputs)
+	{
 		outputsCount = NumberMaxOfOutputs;
 		noError = false;
 	}
 
 	uint8_t outputIndex = 0;
-	for (; outputIndex < outputsCount; outputIndex++, index++) {
+	for (; outputIndex < outputsCount; outputIndex++, index++)
+	{
 		OutputListAuxiliarPointer[index] = outputs[outputIndex];
 	}
 
-	for (; outputIndex < NumberMaxOfOutputs; outputIndex++, index++) {
+	for (; outputIndex < NumberMaxOfOutputs; outputIndex++, index++)
+	{
 		OutputListAuxiliarPointer[index] = 0xFF;
 	}
 
 	return noError;
 }
 
-uint8_t * PetriNet::getInputsPointer(uint8_t transition) {	
+uint8_t *PetriNet::getInputsPointer(uint8_t transition)
+{
 	return AdjacencyList + transition * NumberMaxOfInputs;
 }
 
-uint8_t * PetriNet::getOutputsPointer(uint8_t transition) {
+uint8_t *PetriNet::getOutputsPointer(uint8_t transition)
+{
 	return OutputListAuxiliarPointer + transition * NumberMaxOfOutputs;
 }
 
-uint8_t * PetriNet::getAdjacencyListPointer()
+uint8_t *PetriNet::getAdjacencyListPointer()
 {
 	return AdjacencyList;
 }
 
-void PetriNet::conditionIsSatisfied(uint8_t transition) {
+void PetriNet::conditionIsSatisfied(uint8_t transition)
+{
 	Conditions[transition / 8] |= 0b00000001 << transition % 8;
 }
 
-void PetriNet::conditionIsNotSatisfied(uint8_t transition) {
+void PetriNet::conditionIsNotSatisfied(uint8_t transition)
+{
 	Conditions[transition / 8] &= ~(0b00000001 << transition % 8);
 }
 
-void PetriNet::conditionUpdate(uint8_t transition, bool isSatisfied) {
-	if (isSatisfied) {
+void PetriNet::conditionUpdate(uint8_t transition, bool isSatisfied)
+{
+	if (isSatisfied)
+	{
 		conditionIsSatisfied(transition);
-	} else {
+	}
+	else
+	{
 		conditionIsNotSatisfied(transition);
 	}
 }
 
-bool PetriNet::isConditionSatisfied(uint8_t transition) {
+bool PetriNet::isConditionSatisfied(uint8_t transition)
+{
 	return Conditions[transition / 8] & (0b00000001 << transition % 8);
 }
 
-uint8_t* PetriNet::getConditionsPointer() {
+uint8_t *PetriNet::getConditionsPointer()
+{
 	return Conditions;
 }
 
-void PetriNet::printConditions() {
+void PetriNet::printConditions()
+{
 	print("Conditions: \n\n");
 
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		print(transition);
-		if(isConditionSatisfied(transition)){
+		if (isConditionSatisfied(transition))
+		{
 			print(": Satisfied\n");
-		}else{
+		}
+		else
+		{
 			print(": Not satisfied\n");
 		}
 	}
@@ -515,63 +618,85 @@ void PetriNet::printConditions() {
 	print('\n');
 }
 
-FireError PetriNet::fire() {	
+FireError PetriNet::fire()
+{
 
-	if (hasConditions) {
-		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-			if (FireVector[transition] > 0) {
-				if (!isConditionSatisfied(transition)) {
+	if (hasConditions)
+	{
+		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+		{
+			if (FireVector[transition] > 0)
+			{
+				if (!isConditionSatisfied(transition))
+				{
 					return FireError::CONDITIONS_ARE_NOT_APPLIED;
 				}
-			}				
+			}
 		}
 	}
-	
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		uint16_t fireQuantity = FireVector[transition];
 		uint16_t index = transition * NumberMaxOfInputs;
-		
-		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {			
-			if (AdjacencyList[index] == 0xFF) {
+
+		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+		{
+			if (AdjacencyList[index] == 0xFF)
+			{
 				break;
 			}
-			else {
-				if (TokenVector[AdjacencyList[index]] < fireQuantity) {
+			else
+			{
+				if (TokenVector[AdjacencyList[index]] < fireQuantity)
+				{
 					//Return the token vector to its initial value when an exception occurs
-					for (inputIndex-- ; inputIndex < 0; inputIndex--, index--) {
+					for (inputIndex--; inputIndex < 0; inputIndex--, index--)
+					{
 						TokenVector[AdjacencyList[index]] += fireQuantity;
 					}
 
-					for (transition --; transition < 0; transition--) {
+					for (transition--; transition < 0; transition--)
+					{
 						fireQuantity = FireVector[transition];
 						index = transition * NumberMaxOfInputs;
 
-						for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-							if (AdjacencyList[index] == 0xFF) {
+						for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+						{
+							if (AdjacencyList[index] == 0xFF)
+							{
 								break;
 							}
-							else {
+							else
+							{
 								TokenVector[AdjacencyList[index]] -= fireQuantity;
 							}
 						}
 					}
 
 					return FireError::PRODUCE_EXCEPTION;
-				} else {
-					TokenVector[AdjacencyList[index]] -= fireQuantity;					
-				}				
+				}
+				else
+				{
+					TokenVector[AdjacencyList[index]] -= fireQuantity;
+				}
 			}
-		}		
+		}
 	}
 
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		uint16_t fireQuantity = FireVector[transition];
 		uint16_t index = transition * NumberMaxOfOutputs;
-	
-		for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++) {
-			if (OutputListAuxiliarPointer[index] == 0xFF) {
+
+		for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++)
+		{
+			if (OutputListAuxiliarPointer[index] == 0xFF)
+			{
 				break;
-			} else {
+			}
+			else
+			{
 				TokenVector[OutputListAuxiliarPointer[index]] += fireQuantity;
 			}
 		}
@@ -580,62 +705,82 @@ FireError PetriNet::fire() {
 	return FireError::NO_ERROR;
 }
 
-FireError PetriNet::fire(uint8_t transition) {
-	
-	if (hasConditions) {
-		if (!isConditionSatisfied(transition)) {
-			return FireError::CONDITIONS_ARE_NOT_APPLIED;				
-		}		
+FireError PetriNet::fire(uint8_t transition)
+{
+
+	if (hasConditions)
+	{
+		if (!isConditionSatisfied(transition))
+		{
+			return FireError::CONDITIONS_ARE_NOT_APPLIED;
+		}
 	}
 
 	uint16_t index = transition * NumberMaxOfInputs;
-	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-		if (AdjacencyList[index] == 0xFF) {
+	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+	{
+		if (AdjacencyList[index] == 0xFF)
+		{
 			break;
 		}
-		else {
-			if (TokenVector[AdjacencyList[index]] < 1) {
+		else
+		{
+			if (TokenVector[AdjacencyList[index]] < 1)
+			{
 				//Return the token vector to its initial value when an exception occurs
-				for (transition--; transition < 0; transition--) {
+				for (transition--; transition < 0; transition--)
+				{
 					index = transition * NumberMaxOfInputs;
 
-					for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-						if (AdjacencyList[index] == 0xFF) {
+					for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+					{
+						if (AdjacencyList[index] == 0xFF)
+						{
 							break;
 						}
-						else {
-							TokenVector[AdjacencyList[index]] ++;
+						else
+						{
+							TokenVector[AdjacencyList[index]]++;
 						}
 					}
 				}
-				
+
 				return FireError::PRODUCE_EXCEPTION;
 			}
-			else {
+			else
+			{
 				TokenVector[AdjacencyList[index]]--;
 			}
 		}
 	}
 
 	index = transition * NumberMaxOfOutputs;
-	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++) {
-		if (OutputListAuxiliarPointer[index] == 0xFF) {
+	for (uint8_t outputIndex = 0; outputIndex < NumberMaxOfOutputs; outputIndex++, index++)
+	{
+		if (OutputListAuxiliarPointer[index] == 0xFF)
+		{
 			break;
 		}
-		else {
-			TokenVector[OutputListAuxiliarPointer[index]] ++;
+		else
+		{
+			TokenVector[OutputListAuxiliarPointer[index]]++;
 		}
 	}
 
 	return FireError::NO_ERROR;
 }
 
-FireError PetriNet::isTriggerable(uint8_t transition ) {	
+FireError PetriNet::isTriggerable(uint8_t transition)
+{
 
-	if (hasConditions) {
-		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-			if (FireVector[transition] > 0) {
-				if (!isConditionSatisfied(transition)) {
+	if (hasConditions)
+	{
+		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+		{
+			if (FireVector[transition] > 0)
+			{
+				if (!isConditionSatisfied(transition))
+				{
 					return FireError::CONDITIONS_ARE_NOT_APPLIED;
 				}
 			}
@@ -643,77 +788,103 @@ FireError PetriNet::isTriggerable(uint8_t transition ) {
 	}
 
 	uint16_t index = transition * NumberMaxOfInputs;
-	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-		if (AdjacencyList[index] == 0xFF) {
+	for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+	{
+		if (AdjacencyList[index] == 0xFF)
+		{
 			break;
 		}
-		else {
-			if (TokenVector[AdjacencyList[index]] < 1) {	
+		else
+		{
+			if (TokenVector[AdjacencyList[index]] < 1)
+			{
 				return FireError::PRODUCE_EXCEPTION;
-			}			
+			}
 		}
 	}
 
 	return FireError::NO_ERROR;
 }
 
-FireError PetriNet::isTriggerable() {	
+FireError PetriNet::isTriggerable()
+{
 
-	if (hasConditions) {
-		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
-			if (FireVector[transition] > 0) {
-				if (!isConditionSatisfied(transition)) {
+	if (hasConditions)
+	{
+		for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+		{
+			if (FireVector[transition] > 0)
+			{
+				if (!isConditionSatisfied(transition))
+				{
 					return FireError::CONDITIONS_ARE_NOT_APPLIED;
 				}
 			}
 		}
 	}
 
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		uint16_t fireQuantity = FireVector[transition];
 		uint16_t index = transition * NumberMaxOfInputs;
 
-		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-			if (AdjacencyList[index] == 0xFF) {
+		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+		{
+			if (AdjacencyList[index] == 0xFF)
+			{
 				break;
 			}
-			else {
-				if (TokenVector[AdjacencyList[index]] < fireQuantity) {
+			else
+			{
+				if (TokenVector[AdjacencyList[index]] < fireQuantity)
+				{
 					//Return the token vector to its initial value when an exception occurs
-					for (inputIndex--; inputIndex < 0; inputIndex--, index--) {
+					for (inputIndex--; inputIndex < 0; inputIndex--, index--)
+					{
 						TokenVector[AdjacencyList[index]] += fireQuantity;
 					}
 
-					for (transition--; transition < 0; transition--) {
+					for (transition--; transition < 0; transition--)
+					{
 						fireQuantity = FireVector[transition];
 						index = transition * NumberMaxOfInputs;
 
-						for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-							if (AdjacencyList[index] == 0xFF) {
+						for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+						{
+							if (AdjacencyList[index] == 0xFF)
+							{
 								break;
 							}
-							else {
+							else
+							{
 								TokenVector[AdjacencyList[index]] -= fireQuantity;
 							}
 						}
 					}
 
 					return FireError::PRODUCE_EXCEPTION;
-				} else {
+				}
+				else
+				{
 					TokenVector[AdjacencyList[index]] -= fireQuantity;
 				}
 			}
 		}
 	}
 
-	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++) {
+	for (uint8_t transition = 0; transition < NumberOfTransitions; transition++)
+	{
 		uint16_t fireQuantity = FireVector[transition];
 		uint16_t index = transition * NumberMaxOfInputs;
 
-		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++) {
-			if (AdjacencyList[index] == 0xFF) {
+		for (uint8_t inputIndex = 0; inputIndex < NumberMaxOfInputs; inputIndex++, index++)
+		{
+			if (AdjacencyList[index] == 0xFF)
+			{
 				break;
-			} else {
+			}
+			else
+			{
 				TokenVector[AdjacencyList[index]] += fireQuantity;
 			}
 		}
@@ -722,70 +893,94 @@ FireError PetriNet::isTriggerable() {
 	return FireError::NO_ERROR;
 }
 
-
 //Private methods
-void PetriNet::prepareMemoryStack() {
+void PetriNet::prepareMemoryStack()
+{
 
-	TokenVector = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfPlaces);
-	FireVector  = (uint16_t*)malloc(sizeof(uint16_t)*NumberOfTransitions);
-	GoalToken  = (uint8_t*)malloc(sizeof(uint8_t)*GoalTokenSize);
+	TokenVector = (uint16_t *)malloc(sizeof(uint16_t) * NumberOfPlaces);
+<<<<<<< HEAD
+	FireVector = (uint16_t *)malloc(sizeof(uint16_t) * NumberOfTransitions);
+	GoalToken = (uint8_t *)malloc(sizeof(uint8_t) * GoalTokenSize);
 
+	== == == =
+				 FireVector = (uint16_t *)malloc(sizeof(uint16_t) * NumberOfTransitions);
+	
+>>>>>>> origin/goalToken
 	uint16_t sizeOfAdjacencyList = (NumberMaxOfInputs + NumberMaxOfOutputs) * NumberOfTransitions;
-	AdjacencyList = (uint8_t*)malloc(sizeof(uint8_t)* sizeOfAdjacencyList);
+	AdjacencyList = (uint8_t *)malloc(sizeof(uint8_t) * sizeOfAdjacencyList);
 	OutputListAuxiliarPointer = AdjacencyList + (NumberMaxOfInputs * NumberOfTransitions);
 
-	for (uint8_t listIndex = 0; listIndex < sizeOfAdjacencyList; listIndex++) {
+	for (uint8_t listIndex = 0; listIndex < sizeOfAdjacencyList; listIndex++)
+	{
 		AdjacencyList[listIndex] = 0xFF;
-	}	
+	}
 
-	if (hasConditions) {
+	if (hasConditions)
+	{
 		int8_t sizeOfConditions = (NumberOfTransitions + 7) / 8;
-		Conditions = (uint8_t*)malloc(sizeof(uint8_t)*sizeOfConditions);
-		for (uint8_t conditionsIndex = 0; conditionsIndex < sizeOfConditions; conditionsIndex++) {
+		Conditions = (uint8_t *)malloc(sizeof(uint8_t) * sizeOfConditions);
+		for (uint8_t conditionsIndex = 0; conditionsIndex < sizeOfConditions; conditionsIndex++)
+		{
 			Conditions[conditionsIndex] = 0xFF; //Set all conditions to true;
 		}
+	}
+	if (hasGoalToken)
+	{
+		GoalToken = (uint16_t *)malloc(sizeof(uint16_t) * NumberOfPlaces);
 	}
 }
 
 //Protected Methods
-void PetriNet::print(char toPrint) {
-	platformInterface->print(toPrint);	
+void PetriNet::print(char toPrint)
+{
+	platformInterface->print(toPrint);
 }
 
-void PetriNet::print(uint8_t toPrint) {
-	for (uint8_t base = 100; base >= 1; base = base/10) {
+void PetriNet::print(uint8_t toPrint)
+{
+
+	for (uint8_t base = 100; base >= 1; base = base / 10)
+	{
 		uint8_t num = toPrint / base;
-		if (base == 1 || num != 0) {
+		if (base == 1 || num != 0)
+		{
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
-	}	
+	}
 }
 
-void PetriNet::print(uint16_t toPrint) {
-	for (uint16_t base = 10000; base >= 1; base = base / 10) {
+void PetriNet::print(uint16_t toPrint)
+{
+	for (uint16_t base = 10000; base >= 1; base = base / 10)
+	{
 		uint16_t num = toPrint / base;
-		if (base == 1 || num != 0) {
+		if (base == 1 || num != 0)
+		{
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
 	}
 }
 
-void PetriNet::print(uint32_t toPrint) {
-	for (uint32_t base = 1000000000; base >= 1; base = base / 10) {
+void PetriNet::print(uint32_t toPrint)
+{
+	for (uint32_t base = 1000000000; base >= 1; base = base / 10)
+	{
 		uint32_t num = toPrint / base;
-		if (base == 1 || num != 0) {
+		if (base == 1 || num != 0)
+		{
 			platformInterface->print('0' + num);
 		}
 		toPrint = toPrint % base;
 	}
 }
 
-void PetriNet::print(char* toPrint) {
+void PetriNet::print(char *toPrint)
+{
 	uint8_t counter = 0;
-
-	while(toPrint[counter] != '\0'){
+	while (toPrint[counter] != '\0')
+	{
 		platformInterface->print(toPrint[counter]);
 		counter++;
 	}
